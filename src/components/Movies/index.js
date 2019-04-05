@@ -8,7 +8,16 @@ const MoviesContainer = props => {
   useEffect(() => {
     props.fetchMovieList();
   }, []);
-  return <Movies />;
+
+  const randomizeList = list => {
+    const listCopy = [...list];
+    return listCopy.sort(function() {
+      return 0.5 - Math.random();
+    });
+  };
+
+  const randomizedMovieList = randomizeList(props.movieList);
+  return <Movies movieList={randomizedMovieList} />;
 };
 
 const mapStateToProps = state => ({
