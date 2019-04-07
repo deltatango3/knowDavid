@@ -6,3 +6,5 @@ const reducers = combineReducers({ movies: moviesReducer });
 export default reducers;
 
 export const getMovieList = state => moviesSelectors.getMovieList(state.movies);
+export const getDisplayedMovieList = state =>
+  moviesSelectors.getDisplayedMovieList(state.movies);
