@@ -2,30 +2,35 @@ import React from 'react';
 import Movie from './Movie';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { Droppable } from 'react-beautiful-dnd';
 
 const styles = {
-  root: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
   list: {
-    maxWidth: '1200px'
+    maxWidth: '1200px',
+    width: '100%',
+    margin: '0 auto'
   }
 };
 
 const Movies = props => {
   const getMovies = () => {
-    return props.movieList.map(movie => {
-      return <Movie key={movie.id} movie={movie} />;
+    return props.movieList.map((movie, index) => {
+      return <Movie key={movie.id} movie={movie} index={index} />;
     });
   };
 
   return (
-    <div className={props.classes.root}>
-      <Grid container spacing={8} className={props.classes.list}>
-        {getMovies()}
-      </Grid>
-    </div>
+    <Droppable droppableId="movie-list" direction="horizontal">
+      {provided => (
+        <div
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+          className={props.classes.list}
+        >
+          <Grid container>{getMovies()}</Grid>
+        </div>
+      )}
+    </Droppable>
   );
 };
 
