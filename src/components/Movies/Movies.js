@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, Fragment } from 'react';
 import Movie from './Movie';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,10 +9,13 @@ const styles = {
     maxWidth: '1200px',
     width: '100%',
     margin: '0 auto'
+  },
+  placeholder: {
+    height: '0'
   }
 };
 
-const Movies = props => {
+const Movies = memo(props => {
   const getMovies = () => {
     return props.movieList.map((movie, index) => {
       return <Movie key={movie.id} movie={movie} index={index} />;
@@ -20,18 +23,23 @@ const Movies = props => {
   };
 
   return (
-    <Droppable droppableId="movie-list" direction="horizontal">
-      {provided => (
-        <div
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-          className={props.classes.list}
-        >
-          <Grid container>{getMovies()}</Grid>
-        </div>
-      )}
-    </Droppable>
+    <Fragment>
+      <Droppable droppableId="movie-list" direction="horizontal">
+        {provided => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className={props.classes.list}
+          >
+            <Grid container>{getMovies()}</Grid>
+            <div className={props.classes.placeholder}>
+              {provided.placeholder}
+            </div>
+          </div>
+        )}
+      </Droppable>
+    </Fragment>
   );
-};
+});
 
 export default withStyles(styles)(Movies);
