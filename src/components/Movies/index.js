@@ -19,6 +19,10 @@ const MoviesContainer = props => {
   const onDragEnd = result => {
     const { destination, source } = result;
 
+    if (!destination) {
+      return;
+    }
+
     if (source.index === destination.index) {
       return;
     }
