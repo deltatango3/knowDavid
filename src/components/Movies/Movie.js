@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Card, CardMedia, Grid } from '@material-ui/core';
 import { Draggable } from 'react-beautiful-dnd';
@@ -14,7 +14,7 @@ const styles = {
   }
 };
 
-const Movie = props => {
+const Movie = memo(props => {
   return (
     <Draggable draggableId={props.movie.id} index={props.index}>
       {provided => (
@@ -38,6 +38,6 @@ const Movie = props => {
       )}
     </Draggable>
   );
-};
+});
 
 export default withStyles(styles)(Movie);
