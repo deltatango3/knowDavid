@@ -16,6 +16,14 @@ const MoviesContainer = props => {
     props.fetchMovieList();
   }, []);
 
+  const checkForWin = () => {
+    if (props.displayedMovieList === props.movieList) {
+      console.log('winner');
+    } else {
+      console.log('no win');
+    }
+  };
+
   const onDragEnd = result => {
     const { destination, source } = result;
 
@@ -31,6 +39,7 @@ const MoviesContainer = props => {
       props.displayedMovieList[source.index]
     );
     props.setDisplayedMovieList(movieList);
+    checkForWin();
   };
 
   return (
