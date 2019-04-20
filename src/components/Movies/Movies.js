@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Movie from './Movie';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-const Movies = props => {
+const Movies = memo(props => {
   const getMovies = () => {
     return props.movieList.map((movie, index) => {
       return <Movie key={movie.id} movie={movie} index={index} />;
@@ -28,10 +28,11 @@ const Movies = props => {
           className={props.classes.list}
         >
           <Grid container>{getMovies()}</Grid>
+          <div style={{ height: '0' }}>{provided.placeholder}</div>
         </div>
       )}
     </Droppable>
   );
-};
+});
 
 export default withStyles(styles)(Movies);
