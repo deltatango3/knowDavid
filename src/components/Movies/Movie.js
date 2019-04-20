@@ -27,7 +27,7 @@ const Movie = props => {
           <Grid item className={props.classes.movieCard}>
             <Card square raised className={props.classes.movieCard}>
               <CardMedia
-                className={props.classes.movieTile}
+                className={props.classes.movieCard}
                 image={`https://image.tmdb.org/t/p/w500${
                   props.movie.poster_path
                 }`}
