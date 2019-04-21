@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, Fragment } from 'react';
 import Movie from './Movie';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,20 +23,22 @@ const Movies = memo(props => {
   };
 
   return (
-    <Droppable droppableId="movie-list" direction="horizontal">
-      {provided => (
-        <div
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-          className={props.classes.list}
-        >
-          <Grid container>{getMovies()}</Grid>
-          <div className={props.classes.placeholder}>
-            {provided.placeholder}
+    <Fragment>
+      <Droppable droppableId="movie-list" direction="horizontal">
+        {provided => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className={props.classes.list}
+          >
+            <Grid container>{getMovies()}</Grid>
+            <div className={props.classes.placeholder}>
+              {provided.placeholder}
+            </div>
           </div>
-        </div>
-      )}
-    </Droppable>
+        )}
+      </Droppable>
+    </Fragment>
   );
 });
 
